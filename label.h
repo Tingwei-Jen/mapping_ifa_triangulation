@@ -18,6 +18,9 @@ public:
     std::vector<cv::Point2f> mvKeyPoints;
 
     cv::Point2f mCenterPx;
+
+    Label* previous;
+    Label* next;
 };
 
 #endif //LABEL_H

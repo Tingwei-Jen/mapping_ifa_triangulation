@@ -3,18 +3,18 @@
 
 int Sign::signCounter = 0;
 
-Sign::Sign(const std::vector<Label>& vLabels):mId(signCounter++)
+Sign::Sign(std::vector<Label*> vpLabels):mId(signCounter++)
 {
     std::cout<<"Construct Sign ID: "<<this->mId<<std::endl;
 
-    for(int i=0; i<vLabels.size(); i++)
-        this->mvLabels.push_back(vLabels[i]);
+    for(int i=0; i<vpLabels.size(); i++)
+        this->mvpLabels.push_back(vpLabels[i]);
 }
 
-void Sign::SetVertexes(const std::vector<cv::Point3f>& vVertexes)
+void Sign::SetVertexes3D(const std::vector<cv::Point3f>& vVertexes3D)
 {
-    this->mvVertexes.clear();
-    for(int i=0; i<vVertexes.size(); i++)
-        this->mvVertexes.push_back(vVertexes[i]);
+    this->mvVertexes3D.clear();
+    for(int i=0; i<vVertexes3D.size(); i++)
+        this->mvVertexes3D.push_back(vVertexes3D[i]);
 }
 

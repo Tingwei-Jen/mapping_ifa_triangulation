@@ -4,21 +4,20 @@
 #include "label.h"
 #include <opencv2/opencv.hpp>
 
-
 class Sign //3D object
 {
 public:
-    Sign(const std::vector<Label>& vLabels);
-    void SetVertexes(const std::vector<cv::Point3f>& vVertexes);
-    std::vector<cv::Point3f> GetVertexes(){ return mvVertexes; }
+    Sign(std::vector<Label*> vpLabels);
+    void SetVertexes3D(const std::vector<cv::Point3f>& vVertexes3D);
+    std::vector<cv::Point3f> GetVertexes3D(){ return mvVertexes3D; }
 
 public:
     int mId;
     static int signCounter;
-    std::vector<Label> mvLabels;
+    std::vector<Label*> mvpLabels;
 
 private:
-    std::vector<cv::Point3f> mvVertexes;
+    std::vector<cv::Point3f> mvVertexes3D;
     
 };
 

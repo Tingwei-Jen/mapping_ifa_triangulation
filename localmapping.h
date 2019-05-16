@@ -18,6 +18,7 @@ public:
 
     LocalMapping(cv::Mat K, Map* map);
 
+    //main function
     void Run();
 
     //add from DL
@@ -26,6 +27,8 @@ public:
     //add from VEPP
     void AddNewImg(const cv::Mat& img, const cv::Mat& Tcw = cv::Mat::eye(4,4, CV_32F));
 
+    Map* GepMap(){ return mMap; }
+ 
 private: 
     //initial
     void Initialization();
@@ -36,11 +39,20 @@ private:
     //tracker, generate labels
     void ProcessNewFrame();
 
+    //generate sign, if no more label
+    void CreateNewSign();
+
     //Two tracker
     void TrackReference();
     void TrackLastFrame();
 
+    //IFA
     void InterFrameAssociation(Label* label);
+
+    //create sign's 3D location
+    bool Triangulation(const std::vector<cv::Mat>& Tcws, const std::vector<cv::Point3f>& ptsCam, cv::Point3f& x3Dp);
+
+    void PrintConnection();
 
 private:
 
@@ -59,12 +71,11 @@ private:
     Detection mDetectionRef;
     bool mbNewDetectionRef;
 
-    std::list<Frame*> mplNewFrames;
+    std::list<Frame*> mlpNewFrames;
     Frame* mpCurrentFrame;
     Frame* mpLastFrame;
 
-    std::vector<std::vector<Label*>> mLableTable;
-    std::list<int> mVacantList;
+    Map* mMap;
 
 private:
     const float mDistOfLabelsTH = 5.0;

@@ -4,12 +4,7 @@ Map::Map()
 {
 }
 
-void Map::AddFrame(const Frame& frame)
+void Map::AddSign(Sign* sign)
 {
-	this->mFrames.push_back(frame);
-}
-
-void Map::AddSign(const Sign& sign)
-{
-	this->mSigns.push_back(sign);
+	this->mvpSigns.push_back(sign);
 }

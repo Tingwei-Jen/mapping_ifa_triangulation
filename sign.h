@@ -4,7 +4,8 @@
 #include "label.h"
 #include <opencv2/opencv.hpp>
 
-class Sign
+
+class Sign //3D object
 {
 public:
     Sign(const std::vector<Label>& vLabels);

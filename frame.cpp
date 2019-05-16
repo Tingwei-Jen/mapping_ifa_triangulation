@@ -53,6 +53,11 @@ void Frame::SetPose(const cv::Mat& Tcw)
     this->mOw = -this->mRcw.t()*this->mtcw;
 }
 
+void Frame::AddLabels(Label* label)
+{
+    this->mvpLabels.push_back(label);
+}
+
 cv::Point2f Frame::Cam2Px(const cv::Point3f& pCam)
 {
     cv::Point2f px = cv::Point2f(pCam.x*fx/pCam.z + cx, pCam.y*fy/pCam.z + cy);
@@ -110,7 +115,7 @@ std::vector<int> Frame::GetFeaturesInArea(const float& x, const float& y, const 
     //find key points in the boundry
     for(int i=0; i<this->mvKps.size(); i++)
     {   
-        if(this->mvKps[i].x>minX && this->mvKps[i].x<maxX && this->mvKps[i].y>minY && this->mvKps[i].y<minY)
+        if(this->mvKps[i].x>minX && this->mvKps[i].x<maxX && this->mvKps[i].y>minY && this->mvKps[i].y<maxY)
             vIndices.push_back(i);
     }
 

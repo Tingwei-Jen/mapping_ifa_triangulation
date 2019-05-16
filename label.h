@@ -4,16 +4,20 @@
 #include "frame.h"
 #include <opencv2/opencv.hpp>
 
+class Frame;
+
 class Label
 {
 public:
-    Label(const Frame& frame, const std::vector<cv::Point2f>& vVertexes, const int localId);
+    Label(Frame* frame, const std::vector<cv::Point2f>& vVertexes, const std::vector<cv::Point2f>& vKeyPoints, const int localId);
 
 public:
     int mLocalId;
-    Frame mFrame;
+    Frame* mpFrame;
     std::vector<cv::Point2f> mvVertexes;
-    
+    std::vector<cv::Point2f> mvKeyPoints;
+
+    cv::Point2f mCenterPx;
 };
 
 #endif //LABEL_H

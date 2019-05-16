@@ -1,7 +1,10 @@
 #pragma once
 #ifndef FRAME_H
 #define FRAME_H
+#include "label.h"
 #include <opencv2/opencv.hpp>
+
+class Label;
 
 class Frame
 {
@@ -14,7 +17,11 @@ public:
     // Constructor for Monocular cameras.
 	Frame(const cv::Mat& img, const cv::Mat &K, const cv::Ptr<cv::FastFeatureDetector>& detector);
 
+    //Pose
     void SetPose(const cv::Mat& Tcw);
+
+    //Labels
+    void AddLabels(Label* label);
 
     //Pose
 	cv::Mat GetPose(){ return mTcw.clone(); }
@@ -45,6 +52,8 @@ public:
     cv::Mat mImg;
     cv::Mat mK;
     std::vector<cv::Point2f> mvKps; 
+
+    std::vector<Label*> mvpLabels;
 
 private:
     cv::Ptr<cv::FastFeatureDetector> mDetector;
